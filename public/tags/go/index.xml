@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Go on Armando - Blog</title>
+    <link>http://localhost:1313/tags/go/</link>
+    <description>Recent content in Go on Armando - Blog</description>
+    <generator>Hugo</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 29 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/go/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Distribuições linux e binários Go</title>
+      <link>http://localhost:1313/posts/linux-and-go-binaries/</link>
+      <pubDate>Sat, 29 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/linux-and-go-binaries/</guid>
+      <description>&lt;p&gt;Na minha humilde opinião, um dos motivos que fazem programar em Go ser tão bom é a possibilidade de gerar um binário para execução com a facilidade de um &lt;code&gt;go build .&lt;/code&gt;no terminal.&lt;/p&gt;&#xA;&lt;p&gt;Essa pequena prática traz diversas vantagens para nós desenvolvedores:&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;os binários podem ser usados como forma de documentar as versões do código-fonte;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;facilitamos o deploy da aplicação;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;otimizamos o desempenho ao compilar para determinada arquitetura;&lt;/p&gt;&#xA;&lt;/li&gt;&#xA;&lt;li&gt;&#xA;&lt;p&gt;binários são mais difíceis de ler e alterar, logo aumentamos a segurança ao utilizá-los;&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

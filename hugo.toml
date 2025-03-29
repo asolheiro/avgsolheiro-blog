@@ -1,0 +1,140 @@
+baseurl = "http://armandosolheiro.xyz"
+title = "Armando - Blog"
+theme = "hugo-coder"
+languagecode = "en"
+defaultcontentlanguage = "pt-br"
+
+
+[pagination]
+pagerSize = 20
+
+[services]
+[services.disqus]
+shortname = "avgsolheiro"
+
+[markup.highlight]
+style = "github-dark"
+
+[params]
+  author = "Armando A. v. G. Solheiro"
+  info = "Desenvolvimento, DevOps and Cozinheiro"
+  description = "Blog pessoal"
+  keywords = "blog, developer, personal, devops, software, desenvolvimento de software"
+  avatarurl = "images/profile_pic.png"
+  #gravatar = "john.doe@example.com"
+dateFormat = "January 2, 2006"
+
+  faviconSVG = "/img/favicon.svg"
+  favicon_32 = "/img/favicon-32x32.png"
+  favicon_16 = "/img/favicon-16x16.png"
+
+  since = 2025
+
+  enableTwemoji = true
+
+  colorScheme = "auto"
+  hidecolorschemetoggle = false
+
+  # customCSS = ["css/custom.css"]
+  # customSCSS = ["scss/custom.scss"]
+  # customJS = ["js/custom.js"]
+
+[taxonomies]
+  category = "categories"
+  series = "series"
+  tag = "tags"
+  author = "authors"  
+
+# Social links
+[[params.social]]
+  name = "Github"
+  icon = "fa-brands fa-github fa-2x"
+  weight = 1
+  url = "https://github.com/asolheiro/"
+[[params.social]]
+  name = "LinkedIn"
+  icon = "fa-brands fa-linkedin fa-2x"
+  weight = 2
+  url = "https://www.linkedin.com.in/armandosolheiro/"
+[[params.social]]
+  name = "Mastodon"
+  icon = "fa-brands fa-mastodon fa-2x"
+  weight = 3
+  url = "https://mastodon.social/@asolheiro"
+[[params.social]]
+  name = "Letterboxd"
+  icon = "fa-brands fa-letterboxd fa-2x"
+  weight = 4
+  url = "https://letterboxd.com/asolheiro/"
+[[params.social]]
+  name = "GoodReads"
+  icon = "fa-brands fa-goodreads fa-2x"
+  weight = 5
+  url = "https://goodreads.com/asolheiro/"
+
+# Menu links
+[[menu.main]]
+  name = "Blog"
+  weight = 1
+  url  = "posts/"
+[[menu.main]]
+  name = "Projetos"
+  weight = 2
+  url = "projects/"
+[[menu.main]]
+  name = "Sobre"
+  weight = 3
+  url = "about/"
+
+[languages.en]
+languageName = ":uk:"
+
+[[languages.en.menu.main]]
+name = "About"
+weight = 1
+url = "about/"
+
+[[languages.en.menu.main]]
+name = "Blog"
+weight = 2
+url = "posts/"
+
+[[languages.en.menu.main]]
+name = "Projects"
+weight = 3
+url = "projects/"
+
+[[languages.en.menu.main]]
+name = "Contact"
+weight = 5
+url = "contact/"
+
+[languages.pt-br]
+languageName = ":brazil:"
+title = "Armando - Blog"
+
+[languages.pt-br.params]
+author = "Armando A. v. G. Solheiro"
+info = "Development, DevOps and Cook"
+description = "Armando's personal blog"
+keywords = "blog, developer, personal, devops, software, desenvolvimento de software"
+
+[[languages.pt-br.menu.main]]
+name = "Sobre"
+weight = 1
+url = "about/"
+
+[[languages.pt-br.menu.main]]
+name = "Blog"
+weight = 2
+url = "posts/"
+
+[[languages.pt-br.menu.main]]
+name = "Projetos"
+weight = 3
+url = "projects/"
+
+[[languages.pt-br.menu.main]]
+name = "Contato"
+weight = 5
+url = "contact/"

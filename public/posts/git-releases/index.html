@@ -1,0 +1,663 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  <title>
+  Git Releases · Armando - Blog
+</title>
+  <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="color-scheme" content="light dark">
+
+
+
+
+<meta name="author" content="Armando A. v. G. Solheiro">
+<meta name="description" content="Um caso de uso para criação de Releases no GitLab e no GitHub utilizando esteiras de integração">
+<meta name="keywords" content="blog, developer, personal, devops, software, desenvolvimento de software">
+
+
+
+  <meta name="twitter:card" content="summary">
+  <meta name="twitter:title" content="Git Releases">
+  <meta name="twitter:description" content="Um caso de uso para criação de Releases no GitLab e no GitHub utilizando esteiras de integração">
+
+<meta property="og:url" content="http://localhost:1313/posts/git-releases/">
+  <meta property="og:site_name" content="Armando - Blog">
+  <meta property="og:title" content="Git Releases">
+  <meta property="og:description" content="Um caso de uso para criação de Releases no GitLab e no GitHub utilizando esteiras de integração">
+  <meta property="og:locale" content="pt_br">
+  <meta property="og:type" content="article">
+    <meta property="article:section" content="posts">
+    <meta property="article:published_time" content="2025-03-29T00:00:00+00:00">
+    <meta property="article:modified_time" content="2025-03-29T00:00:00+00:00">
+    <meta property="article:tag" content="Git">
+    <meta property="article:tag" content="Releases">
+    <meta property="article:tag" content="Github">
+    <meta property="article:tag" content="Gitlab">
+    <meta property="article:tag" content="Pipeline">
+    <meta property="article:tag" content="CI/CD">
+      <meta property="og:see_also" content="http://localhost:1313/posts/linux-and-go-binaries/">
+
+
+
+
+<link rel="canonical" href="http://localhost:1313/posts/git-releases/">
+
+
+<link rel="preload" href="/fonts/fa-brands-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-regular-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/fonts/fa-solid-900.woff2" as="font" type="font/woff2" crossorigin>
+
+
+  
+  
+  <link rel="stylesheet" href="/css/coder.css" media="screen">
+
+
+
+
+
+
+  
+    
+    
+    <link rel="stylesheet" href="/css/coder-dark.css" media="screen">
+  
+
+
+
+ 
+
+
+
+
+<link rel="icon" type="image/svg+xml" href="/img/favicon.svg" sizes="any">
+<link rel="icon" type="image/png" href="/img/favicon-32x32.png" sizes="32x32">
+<link rel="icon" type="image/png" href="/img/favicon-16x16.png" sizes="16x16">
+
+<link rel="apple-touch-icon" href="/images/apple-touch-icon.png">
+<link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+
+<link rel="manifest" href="/site.webmanifest">
+<link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+
+
+
+
+
+
+
+
+
+</head>
+
+
+
+
+
+
+<body class="preload-transitions colorscheme-auto">
+  
+<div class="float-container">
+    <a id="dark-mode-toggle" class="colorscheme-toggle">
+        <i class="fa-solid fa-adjust fa-fw" aria-hidden="true"></i>
+    </a>
+</div>
+
+
+  <main class="wrapper">
+    <nav class="navigation">
+  <section class="container">
+    
+    <a class="navigation-title" href="http://localhost:1313/">
+      Armando - Blog
+    </a>
+    
+    
+      <input type="checkbox" id="menu-toggle" />
+      <label class="menu-button float-right" for="menu-toggle">
+        <i class="fa-solid fa-bars fa-fw" aria-hidden="true"></i>
+      </label>
+      <ul class="navigation-list">
+        
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/about/">Sobre</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/posts/">Blog</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/projects/">Projetos</a>
+            </li>
+          
+            <li class="navigation-item">
+              <a class="navigation-link " href="/contact/">Contato</a>
+            </li>
+          
+        
+        
+          
+          
+          
+            
+          
+            
+              
+                <li class="navigation-item menu-separator">
+                  <span>|</span>
+                </li>
+                
+              
+              <li class="navigation-item">
+                <a href="/en/">🇬🇧</a>
+              </li>
+            
+          
+        
+      </ul>
+    
+  </section>
+</nav>
+
+
+    <div class="content">
+      
+  <section class="container post">
+    <article>
+      <header>
+        <div class="post-title">
+          <h1 class="title">
+            <a class="title-link" href="http://localhost:1313/posts/git-releases/">
+              Git Releases
+            </a>
+          </h1>
+        </div>
+        <div class="post-meta">
+          <div class="date">
+            <span class="posted-on">
+              <i class="fa-solid fa-calendar" aria-hidden="true"></i>
+              <time datetime="2025-03-29T00:00:00Z">
+                março 29, 2025
+              </time>
+            </span>
+            <span class="reading-time">
+              <i class="fa-solid fa-clock" aria-hidden="true"></i>
+              6 minutos de leitura
+            </span>
+          </div>
+          <div class="authors">
+  <i class="fa-solid fa-user" aria-hidden="true"></i>
+    <a href="/authors/armando-solheiro/">Armando Solheiro</a></div>
+
+          <div class="categories">
+  <i class="fa-solid fa-folder" aria-hidden="true"></i>
+    <a href="/categories/pipeline/">Pipeline</a></div>
+
+          <div class="tags">
+  <i class="fa-solid fa-tag" aria-hidden="true"></i>
+    <span class="tag">
+      <a href="/tags/git/">Git</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/releases/">Releases</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/github/">Github</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/gitlab/">Gitlab</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/pipeline/">Pipeline</a>
+    </span>
+      <span class="separator">•</span>
+    <span class="tag">
+      <a href="/tags/ci/cd/">CI/CD</a>
+    </span></div>
+
+        </div>
+      </header>
+
+      <div class="post-content">
+        
+        <h2 id="1-introdução">
+  1. Introdução
+  <a class="heading-link" href="#1-introdu%c3%a7%c3%a3o">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link para o cabeçalho"></i>
+    <span class="sr-only">Link para o cabeçalho</span>
+  </a>
+</h2>
+<p>Recentemente tive a oportunidade de escrever uma CLI em Go para automatizar a produção de relatórios com dados retirados do <strong>Gita</strong>, uma plataforma de monitoramento e gerenciamento de clusters desenvolvida pela empresa na qual trabalho.</p>
+<p>A CLI atende muito bem seu objetivo, mas, por se tratar de uma empresa com foco em Infraestrutura achamos mais adequado fornecer o binário já construído, ao invés de delegar que o usuário clone o repositório e construa o artefato final.</p>
+<p>Para centralizar a distribuição dessa maneira, ambas plataformas de hospedagem de código, GitHUb e GitLab, permitem disponibilizar <em>releases</em>/lançamentos para o usuário no mesmo repositório onde o código fonte é mantido.</p>
+<p>Basicamente, o que precisamos é de uma esteira que possua dois passos:</p>
+<ol>
+<li>
+<p>Construção (<em>build</em>);</p>
+</li>
+<li>
+<p>Disponibilização (<em>Release</em>)</p>
+</li>
+</ol>
+<p>Tudo isso feito utilizando as ferramentas de CI/CD das plataformas, assunto que tratarei neste texto.</p>
+<h2 id="2-github-actions">
+  2. GitHub Actions
+  <a class="heading-link" href="#2-github-actions">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link para o cabeçalho"></i>
+    <span class="sr-only">Link para o cabeçalho</span>
+  </a>
+</h2>
+<h3 id="21-configuração-inicial">
+  2.1. Configuração inicial
+  <a class="heading-link" href="#21-configura%c3%a7%c3%a3o-inicial">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link para o cabeçalho"></i>
+    <span class="sr-only">Link para o cabeçalho</span>
+  </a>
+</h3>
+<p>Para o GitHub Action, iniciamos definindo as configurações da <em>pipeline</em>:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#7ee787">name</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">Release app binaries</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#7ee787">on</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">push</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#7ee787">tags</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span>- <span style="color:#a5d6ff">&#39;v*&#39;</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#7ee787">permissions</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">contents</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">write</span><span style="color:#6e7681">
+</span></span></span></code></pre></div><p>Nesse caso, definimos três informações:</p>
+<ul>
+<li>
+<p><code>name</code>: escolhendo o nome que a esteira receberá no GitHub;</p>
+</li>
+<li>
+<p><code>on.push.tags: ['v*']</code>: definindo que a esteira será acionada toda vez que houver um push em qualquer;</p>
+</li>
+<li>
+<p><code>permissions.contents: write</code>: para permitir que lá na frente o <em>Actions</em> possa escrever no repositório e adicionar as releases.</p>
+</li>
+</ul>
+<blockquote>
+<p>Nota: Além dessa configuração, é necessário que o repositório esteja com <em>Read and Write</em> configurado em &ldquo;Settings &gt;&gt; Actions &gt;&gt; General &gt;&gt; Workflow permission&rdquo;</p></blockquote>
+<p>Além disso, configuramos o ambiente utilizando para os processos:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#7ee787">jobs</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">build</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#7ee787">name</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">Build and Release</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#7ee787">runs-on</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">ubuntu-latest</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#7ee787">steps</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span>- <span style="color:#7ee787">name</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">Checkout code</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span><span style="color:#7ee787">uses</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">actions/checkout@v4</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span>- <span style="color:#7ee787">name</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">Set up Go</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span><span style="color:#7ee787">uses</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">actions/setup-go@v5</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span><span style="color:#7ee787">with</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">          </span><span style="color:#7ee787">go-version</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#39;1.23.5&#39;</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">          
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span>- <span style="color:#7ee787">name</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">Get version from tag</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span><span style="color:#7ee787">id</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">get_version</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span><span style="color:#7ee787">run</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">echo &#34;VERSION=${GITHUB_REF#refs/tags/}&#34; &gt;&gt; $GITHUB_ENV</span><span style="color:#6e7681">
+</span></span></span></code></pre></div><ul>
+<li>
+<p>Utilizamos <code>jobs.build.runs-on: ubuntu-latest</code> para dizer que o processo (<code>job.build</code>) será executado em cima da última versão do Ubuntu;</p>
+</li>
+<li>
+<p><code>jobs.steps[0].uses: actions/checkout@v4</code> para copiar o conteúdo do repositório para o agente;</p>
+</li>
+<li>
+<p><code>jobs.steps[1].uses: actions/setup-go@v5</code> para definir a versão de Go utilizada, <code>1.23.5</code>, neste caso;</p>
+</li>
+<li>
+<p><code>jobs.steps[2]</code> para consumir a tag do push.</p>
+</li>
+</ul>
+<h3 id="22-construção-dos-binários">
+  2.2. Construção dos binários
+  <a class="heading-link" href="#22-constru%c3%a7%c3%a3o-dos-bin%c3%a1rios">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link para o cabeçalho"></i>
+    <span class="sr-only">Link para o cabeçalho</span>
+  </a>
+</h3>
+<p>Para criar os binários, utilizamos as variáveis <code>GOOS</code> e <code>GOARCH</code> para definir, respectivamente, o sistema operacional e a arquitetura da construção:</p>
+<table>
+  <thead>
+      <tr>
+          <th><code>GOOS</code></th>
+          <th><code>GOARCH</code></th>
+          <th>binário resultante</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td>linux</td>
+          <td>amd64</td>
+          <td>ghc-v1.0.0-linux-amd64</td>
+      </tr>
+      <tr>
+          <td>linux</td>
+          <td>arm64</td>
+          <td>ghc-v1.0.0-linux-arm64</td>
+      </tr>
+      <tr>
+          <td>windows</td>
+          <td>amd64</td>
+          <td>ghc-v1.0.0-windows-amd64</td>
+      </tr>
+  </tbody>
+</table>
+<p>Elas são utilizadas em comandos do contrução padrão da linguagem, com suas saídas direcionadas para o diretório <code>./dist</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#7ee787">name</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">Build binaries</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">run</span>:<span style="color:#6e7681"> </span>|<span style="color:#a5d6ff">
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">    # Create dist directory
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">    mkdir -p dist
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">    
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">    # Build for each platform
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">    GOOS=linux GOARCH=amd64 go build -o &#34;dist/${{ github.event.repository.name }}-${{ env.VERSION }}-linux-amd64&#34; -ldflags=&#34;-X &#39;main.Version=${{ env.VERSION }}&#39;&#34; ./main.go
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">    GOOS=linux GOARCH=arm64 go build -o &#34;dist/${{ github.event.repository.name }}-${{ env.VERSION }}-linux-arm64&#34; -ldflags=&#34;-X &#39;main.Version=${{ env.VERSION }}&#39;&#34; ./main.go
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">    GOOS=windows GOARCH=amd64 go build -o &#34;dist/${{ github.event.repository.name }}-${{ env.VERSION }}-windows-amd64.exe&#34; -ldflags=&#34;-X &#39;main.Version=${{ env.VERSION }}&#39;&#34; ./main.go
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">    
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">    # Generate checksums
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">    cd dist
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">    sha256sum * &gt; checksums.txt
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">    cd ..</span><span style="color:#6e7681">
+</span></span></span></code></pre></div><h3 id="23-disponibilizando-os-artefatos">
+  2.3. Disponibilizando os artefatos
+  <a class="heading-link" href="#23-disponibilizando-os-artefatos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link para o cabeçalho"></i>
+    <span class="sr-only">Link para o cabeçalho</span>
+  </a>
+</h3>
+<p>A distribuição dos artefatos produzidos é feita utilizando um action desenvolvido pela comunidade, o <a href="https://github.com/softprops/action-gh-release"  class="external-link" target="_blank" rel="noopener"><code>softprops/action-gh-release</code></a>. Utilizando ele, temos apenas o trabalho de informar valores já guardados em variáveis do ambiente e indicar o endereço do artefato; nesse caso, todos dentro do diretório <code>dist/</code></p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span>- <span style="color:#7ee787">name</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">Create Release</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">id</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">create_release</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">uses</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">softprops/action-gh-release@v1</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">env</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#7ee787">GITHUB_TOKEN</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">${{ secrets.GITHUB_TOKEN }}</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">with</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#7ee787">name</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">Release ${{ env.VERSION }}</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#7ee787">draft</span>:<span style="color:#6e7681"> </span><span style="color:#79c0ff">false</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#7ee787">prerelease</span>:<span style="color:#6e7681"> </span><span style="color:#79c0ff">false</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#7ee787">files</span>:<span style="color:#6e7681"> </span>|<span style="color:#a5d6ff">
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">      dist/*</span><span style="color:#6e7681">
+</span></span></span></code></pre></div><h3 id="24-push">
+  2.4. Push
+  <a class="heading-link" href="#24-push">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link para o cabeçalho"></i>
+    <span class="sr-only">Link para o cabeçalho</span>
+  </a>
+</h3>
+<p>Definida esteira, enviamos o conteúdo para o repositório:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git tag -a v1.0.0 -m <span style="color:#a5d6ff">&#34;Release v1.0.0&#34;</span>
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#a5d6ff">&#34;Adding pipeline to make releases available&#34;</span>
+</span></span><span style="display:flex;"><span>git push github v1.0.0
+</span></span></code></pre></div><p>E verificamos o resultado:</p>
+<p>![](<a href="https://cdn.hashnode.com/res/hashnode/image/upload/v1740182709492/1c7be34e-6441-49aa-aace-0016491b2d1a.png"  class="external-link" target="_blank" rel="noopener">https://cdn.hashnode.com/res/hashnode/image/upload/v1740182709492/1c7be34e-6441-49aa-aace-0016491b2d1a.png</a> align=&ldquo;center&rdquo;)</p>
+<h2 id="3-gitlab-ci">
+  3. GitLab CI
+  <a class="heading-link" href="#3-gitlab-ci">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link para o cabeçalho"></i>
+    <span class="sr-only">Link para o cabeçalho</span>
+  </a>
+</h2>
+<h3 id="31-configurações-iniciais">
+  3.1. Configurações iniciais
+  <a class="heading-link" href="#31-configura%c3%a7%c3%b5es-iniciais">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link para o cabeçalho"></i>
+    <span class="sr-only">Link para o cabeçalho</span>
+  </a>
+</h3>
+<p>No GiLab também começamos definindo informações:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#7ee787">variables</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">REPO_NAME</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">ghc</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">VERSION</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">${CI_COMMIT_TAG}</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">PACKAGE_NAME</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">${REPO_NAME}</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">PACKAGE_REGISTRY_URL</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">&#34;${CI_API_V4_URL}/projects/${CI_PROJECT_ID}/packages/generic/${PACKAGE_NAME}/${VERSION}&#34;</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681"></span><span style="color:#7ee787">stages</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span>- <span style="color:#a5d6ff">build</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span>- <span style="color:#a5d6ff">upload</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span>- <span style="color:#a5d6ff">release</span><span style="color:#6e7681">
+</span></span></span></code></pre></div><p>Já nessa plataforma, dividimos a execução em três estágios, construção, upload e lançamento.</p>
+<h3 id="31-construção-dos-binários">
+  3.1. Construção dos binários
+  <a class="heading-link" href="#31-constru%c3%a7%c3%a3o-dos-bin%c3%a1rios">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link para o cabeçalho"></i>
+    <span class="sr-only">Link para o cabeçalho</span>
+  </a>
+</h3>
+<p>A etapa de construção é essencialmente a mesma feita para o GitHub: o comando padrão executado diversas vezes para gerar um artefato para cara combinação de sistema operacional e arquitetura.</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#7ee787">build</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">stage</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">build</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">image</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">golang:latest</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">rules</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- <span style="color:#7ee787">if</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">$CI_COMMIT_TAG</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">script</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- <span style="color:#a5d6ff">mkdir -p dist</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#8b949e;font-style:italic"># Linux AMD64</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- <span style="color:#a5d6ff">GOOS=linux GOARCH=amd64 CGO_ENABLED=0 go build -o &#34;dist/${REPO_NAME}-${VERSION}-linux-amd64&#34; -ldflags=&#34;-X &#39;main.Version=${VERSION}&#39;&#34; ./main.go</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- <span style="color:#a5d6ff">cd dist &amp;&amp; sha256sum &#34;${REPO_NAME}-${VERSION}-linux-amd64&#34; &gt; &#34;${REPO_NAME}-${VERSION}-linux-amd64.sha256&#34; &amp;&amp; cd ..</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#8b949e;font-style:italic"># Linux ARM64</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- <span style="color:#a5d6ff">GOOS=linux GOARCH=arm64 CGO_ENABLED=0 go build -o &#34;dist/${REPO_NAME}-${VERSION}-linux-arm64&#34; -ldflags=&#34;-X &#39;main.Version=${VERSION}&#39;&#34; ./main.go</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- <span style="color:#a5d6ff">cd dist &amp;&amp; sha256sum &#34;${REPO_NAME}-${VERSION}-linux-arm64&#34; &gt; &#34;${REPO_NAME}-${VERSION}-linux-arm64.sha256&#34; &amp;&amp; cd ..</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#8b949e;font-style:italic"># Windows AMD64</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- <span style="color:#a5d6ff">GOOS=windows GOARCH=amd64 CGO_ENABLED=0 go build -o &#34;dist/${REPO_NAME}-${VERSION}-windows-amd64.exe&#34; -ldflags=&#34;-X &#39;main.Version=${VERSION}&#39;&#34; ./main.go</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- <span style="color:#a5d6ff">cd dist &amp;&amp; sha256sum &#34;${REPO_NAME}-${VERSION}-windows-amd64.exe&#34; &gt; &#34;${REPO_NAME}-${VERSION}-windows-amd64.exe.sha256&#34; &amp;&amp; cd ..</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">artifacts</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#7ee787">paths</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span>- <span style="color:#a5d6ff">dist/</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span><span style="color:#7ee787">expire_in</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">1</span><span style="color:#6e7681"> </span><span style="color:#a5d6ff">week</span><span style="color:#6e7681">
+</span></span></span></code></pre></div><p>Note que, não definimos o <code>on.push.tags: 'v*'</code> para explicitar que o gatilho da esteira é um <code>push</code> em qualquer tag, mas é possível ver nesse estágio (e em todos os seguintes) temos <code>build.rules[0].if: $CI_COMMIT_TAG:</code> indicando o mesmo gatilho de ativação.</p>
+<p>Outro ponto interessante é <code>build.artifacts.expire_in: 1 week</code>. Nesse campo, temos a possibilidade de definir por quanto tempo os artefatos devem permanecer disponíveis na esteira.</p>
+<h3 id="32-upload">
+  3.2. Upload
+  <a class="heading-link" href="#32-upload">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link para o cabeçalho"></i>
+    <span class="sr-only">Link para o cabeçalho</span>
+  </a>
+</h3>
+<p>Diferente do GitHUb, no qual adicionamos os artefatos direto no lançamento de versões, aqui utilizamos esse estágio intermediário para salvar as saídas.</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#7ee787">upload</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">stage</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">upload</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">image</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">curlimages/curl:latest</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">rules</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- <span style="color:#7ee787">if</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">$CI_COMMIT_TAG</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">dependencies</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- <span style="color:#a5d6ff">build</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">script</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- |<span style="color:#a5d6ff">
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">      for file in dist/*; do
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">        filename=$(basename $file)
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">        echo &#34;Uploading $filename to Package Registry...&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">        curl --header &#34;JOB-TOKEN: ${CI_JOB_TOKEN}&#34; \
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">          --upload-file $file \
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">          &#34;${PACKAGE_REGISTRY_URL}/${filename}&#34;
+</span></span></span><span style="display:flex;"><span><span style="color:#a5d6ff">      done</span><span style="color:#6e7681">
+</span></span></span></code></pre></div><p>Os binário produzidos no estágio de construção são salvos em um &ldquo;<em>registry</em>&rdquo;, definido lá em cima, nas configurações iniciais.</p>
+<h3 id="33-distribuição-dos-artefatos">
+  3.3. Distribuição dos artefatos
+  <a class="heading-link" href="#33-distribui%c3%a7%c3%a3o-dos-artefatos">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link para o cabeçalho"></i>
+    <span class="sr-only">Link para o cabeçalho</span>
+  </a>
+</h3>
+<p>Para realizar a distribuição dos binários produzidos utilizamos o <code>release-cli</code>, ferramenta do GitLab CI indicada na própria <a href="https://docs.gitlab.com/user/project/releases/release_cli/"  class="external-link" target="_blank" rel="noopener">documentação oficial</a></p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-yaml" data-lang="yaml"><span style="display:flex;"><span><span style="color:#7ee787">release</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">stage</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">release</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">image</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">registry.gitlab.com/gitlab-org/release-cli:latest</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">rules</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- <span style="color:#7ee787">if</span>:<span style="color:#6e7681"> </span><span style="color:#a5d6ff">$CI_COMMIT_TAG</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">needs</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- <span style="color:#a5d6ff">upload</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">  </span><span style="color:#7ee787">script</span>:<span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    </span>- <span style="color:#a5d6ff">|</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span><span style="color:#a5d6ff">assets_links=&#34;&#34;</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span><span style="color:#8b949e;font-style:italic"># Linux AMD64</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span><span style="color:#a5d6ff">assets_links=&#34;$assets_links --assets-link={\&#34;name\&#34;:\&#34;${REPO_NAME}-${VERSION}-linux-amd64\&#34;,\&#34;url\&#34;:\&#34;${PACKAGE_REGISTRY_URL}/${REPO_NAME}-${VERSION}-linux-amd64\&#34;}&#34;</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span><span style="color:#a5d6ff">assets_links=&#34;$assets_links --assets-link={\&#34;name\&#34;:\&#34;${REPO_NAME}-${VERSION}-linux-amd64.sha256\&#34;,\&#34;url\&#34;:\&#34;${PACKAGE_REGISTRY_URL}/${REPO_NAME}-${VERSION}-linux-amd64.sha256\&#34;}&#34;</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span><span style="color:#8b949e;font-style:italic"># Linux ARM64</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span><span style="color:#a5d6ff">assets_links=&#34;$assets_links --assets-link={\&#34;name\&#34;:\&#34;${REPO_NAME}-${VERSION}-linux-arm64\&#34;,\&#34;url\&#34;:\&#34;${PACKAGE_REGISTRY_URL}/${REPO_NAME}-${VERSION}-linux-arm64\&#34;}&#34;</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span><span style="color:#a5d6ff">assets_links=&#34;$assets_links --assets-link={\&#34;name\&#34;:\&#34;${REPO_NAME}-${VERSION}-linux-arm64.sha256\&#34;,\&#34;url\&#34;:\&#34;${PACKAGE_REGISTRY_URL}/${REPO_NAME}-${VERSION}-linux-arm64.sha256\&#34;}&#34;</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span><span style="color:#8b949e;font-style:italic"># Windows AMD64</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span><span style="color:#a5d6ff">assets_links=&#34;$assets_links --assets-link={\&#34;name\&#34;:\&#34;${REPO_NAME}-${VERSION}-windows-amd64.exe\&#34;,\&#34;url\&#34;:\&#34;${PACKAGE_REGISTRY_URL}/${REPO_NAME}-${VERSION}-windows-amd64.exe\&#34;}&#34;</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span><span style="color:#a5d6ff">assets_links=&#34;$assets_links --assets-link={\&#34;name\&#34;:\&#34;${REPO_NAME}-${VERSION}-windows-amd64.exe.sha256\&#34;,\&#34;url\&#34;:\&#34;${PACKAGE_REGISTRY_URL}/${REPO_NAME}-${VERSION}-windows-amd64.exe.sha256\&#34;}&#34;</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">    
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span><span style="color:#8b949e;font-style:italic"># Create release with all assets</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">      </span><span style="color:#a5d6ff">release-cli create \</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span>--<span style="color:#a5d6ff">name &#34;Release ${VERSION}&#34; \</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span>--<span style="color:#a5d6ff">tag-name $CI_COMMIT_TAG \</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span>--<span style="color:#a5d6ff">description &#34;Release ${VERSION}&#34; \</span><span style="color:#6e7681">
+</span></span></span><span style="display:flex;"><span><span style="color:#6e7681">        </span><span style="color:#a5d6ff">$assets_links</span><span style="color:#6e7681">
+</span></span></span></code></pre></div><p>Essencialmente, o que fazemos aqui é definir a URL dos artefatos e executar o comando uma vez para cada um.</p>
+<h3 id="34-push">
+  3.4. Push
+  <a class="heading-link" href="#34-push">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link para o cabeçalho"></i>
+    <span class="sr-only">Link para o cabeçalho</span>
+  </a>
+</h3>
+<p>Definida esteira, enviamos o conteúdo para o repositório:</p>
+<div class="highlight"><pre tabindex="0" style="color:#e6edf3;background-color:#0d1117;-moz-tab-size:4;-o-tab-size:4;tab-size:4;"><code class="language-bash" data-lang="bash"><span style="display:flex;"><span>git tag -a v1.0.0 -m <span style="color:#a5d6ff">&#34;Release v1.0.0&#34;</span>
+</span></span><span style="display:flex;"><span>git add .
+</span></span><span style="display:flex;"><span>git commit -m <span style="color:#a5d6ff">&#34;Adding pipeline to make releases available&#34;</span>
+</span></span><span style="display:flex;"><span>git push gitlab v1.0.0
+</span></span></code></pre></div><p>E conferimos o resultado:</p>
+<p>![](<a href="https://cdn.hashnode.com/res/hashnode/image/upload/v1740182732753/bf1bbe1f-2de5-4153-a2ae-b74563abd5a4.png"  class="external-link" target="_blank" rel="noopener">https://cdn.hashnode.com/res/hashnode/image/upload/v1740182732753/bf1bbe1f-2de5-4153-a2ae-b74563abd5a4.png</a> align=&ldquo;center&rdquo;)</p>
+<h2 id="4-considerações-finais">
+  4. Considerações finais
+  <a class="heading-link" href="#4-considera%c3%a7%c3%b5es-finais">
+    <i class="fa-solid fa-link" aria-hidden="true" title="Link para o cabeçalho"></i>
+    <span class="sr-only">Link para o cabeçalho</span>
+  </a>
+</h2>
+<p>A ideia inicial era disponibilizar o aplicativo para máquinas macOS também, entretanto para que a distribuição ficasse redonda, sem nenhuma falha, era necessário certificar a aplicação com um software Apple que custa uma quantidade considerável.</p>
+<p>Por esse motivo retirei SO Apple da lista, apesar de o processo de construção ser exatamente o mesmo.</p>
+
+      </div>
+
+
+      <footer>
+        
+
+<section class="see-also">
+  
+    
+    
+    
+  
+</section>
+
+
+        <div id="disqus_thread"></div>
+<script>
+  window.disqus_config = function () {
+    
+    
+    
+    };
+    (function() {
+        if (["localhost", "127.0.0.1"].indexOf(window.location.hostname) != -1) {
+            document.getElementById('disqus_thread').innerHTML = 'Disqus comments not available by default when the website is previewed locally.';
+            return;
+        }
+        var d = document, s = d.createElement('script'); s.async = true;
+        s.src = '//' + "avgsolheiro" + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+    
+    document.addEventListener('themeChanged', function (e) { 
+        if (document.readyState == 'complete') {
+          DISQUS.reset({ reload: true, config: disqus_config });
+        }
+    });
+</script>
+        
+        
+        
+        
+        
+        
+      </footer>
+    </article>
+
+    
+  </section>
+
+    </div>
+
+    <footer class="footer">
+  <section class="container">
+    ©
+    
+    2025
+     Armando A. v. G. Solheiro 
+    ·
+    
+    Promovido por <a href="https://gohugo.io/" target="_blank" rel="noopener">Hugo</a> & <a href="https://github.com/luizdepra/hugo-coder/" target="_blank" rel="noopener">Coder</a>.
+    
+  </section>
+</footer>
+
+  </main>
+
+  
+
+  
+  
+  <script src="/js/coder.js"></script>
+  
+
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+</body>
+</html>

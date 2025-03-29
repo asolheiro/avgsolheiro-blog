@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Gitlab on Armando - Blog</title>
+    <link>http://localhost:1313/tags/gitlab/</link>
+    <description>Recent content in Gitlab on Armando - Blog</description>
+    <generator>Hugo</generator>
+    <language>pt-br</language>
+    <lastBuildDate>Sat, 29 Mar 2025 00:00:00 +0000</lastBuildDate>
+    <atom:link href="http://localhost:1313/tags/gitlab/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Git Releases</title>
+      <link>http://localhost:1313/posts/git-releases/</link>
+      <pubDate>Sat, 29 Mar 2025 00:00:00 +0000</pubDate>
+      <guid>http://localhost:1313/posts/git-releases/</guid>
+      <description>&lt;h2 id=&#34;1-introdução&#34;&gt;&#xA;  1. Introdução&#xA;  &lt;a class=&#34;heading-link&#34; href=&#34;#1-introdu%c3%a7%c3%a3o&#34;&gt;&#xA;    &lt;i class=&#34;fa-solid fa-link&#34; aria-hidden=&#34;true&#34; title=&#34;Link para o cabeçalho&#34;&gt;&lt;/i&gt;&#xA;    &lt;span class=&#34;sr-only&#34;&gt;Link para o cabeçalho&lt;/span&gt;&#xA;  &lt;/a&gt;&#xA;&lt;/h2&gt;&#xA;&lt;p&gt;Recentemente tive a oportunidade de escrever uma CLI em Go para automatizar a produção de relatórios com dados retirados do &lt;strong&gt;Gita&lt;/strong&gt;, uma plataforma de monitoramento e gerenciamento de clusters desenvolvida pela empresa na qual trabalho.&lt;/p&gt;&#xA;&lt;p&gt;A CLI atende muito bem seu objetivo, mas, por se tratar de uma empresa com foco em Infraestrutura achamos mais adequado fornecer o binário já construído, ao invés de delegar que o usuário clone o repositório e construa o artefato final.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>
