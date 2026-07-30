@@ -55,7 +55,7 @@ dateFormat = "January 2, 2006"
   name = "LinkedIn"
   icon = "fa-brands fa-linkedin fa-2x"
   weight = 2
-  url = "https://www.linkedin.com.in/armandosolheiro/"
+  url = "https://www.linkedin.com/in/armandosolheiro/"
 [[params.social]]
   name = "Mastodon"
   icon = "fa-brands fa-mastodon fa-2x"
