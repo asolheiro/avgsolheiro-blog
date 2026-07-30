@@ -1,26 +1,6 @@
-<!-- Static "my apps" modal, injected at the theme's body-extensions hook. -->
+<!-- Static "my apps" modal, injected at the theme's body-extensions hook.
+     Triggered by the "Apps" link added to the top nav (layouts/partials/header.html). -->
 <style>
-  #my-apps-fab {
-    position: fixed;
-    right: 1.25rem;
-    bottom: 1.25rem;
-    z-index: 1000;
-    display: inline-flex;
-    align-items: center;
-    gap: 0.5rem;
-    padding: 0.6rem 1rem;
-    border-radius: 999px;
-    border: none;
-    background: #2f333f;
-    color: #fff;
-    font-size: 0.9rem;
-    font-family: inherit;
-    cursor: pointer;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.25);
-  }
-  #my-apps-fab:hover {
-    background: #3f4451;
-  }
   #my-apps-overlay {
     display: none;
     position: fixed;
@@ -84,10 +64,6 @@
   }
 </style>
 
-<button id="my-apps-fab" type="button" aria-haspopup="dialog" aria-controls="my-apps-overlay">
-  Meus apps
-</button>
-
 <div id="my-apps-overlay" role="dialog" aria-modal="true" aria-labelledby="my-apps-title">
   <div id="my-apps-modal">
     <h3 id="my-apps-title">Meus apps</h3>
@@ -111,18 +87,19 @@
 
 <script>
   (function () {
-    var fab = document.getElementById("my-apps-fab");
+    var trigger = document.getElementById("my-apps-trigger");
     var overlay = document.getElementById("my-apps-overlay");
     var closeBtn = document.getElementById("my-apps-close");
 
-    function open() {
+    function open(e) {
+      if (e) e.preventDefault();
       overlay.classList.add("open");
     }
     function close() {
       overlay.classList.remove("open");
     }
 
-    fab.addEventListener("click", open);
+    trigger.addEventListener("click", open);
     closeBtn.addEventListener("click", close);
     overlay.addEventListener("click", function (e) {
       if (e.target === overlay) close();
