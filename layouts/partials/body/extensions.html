@@ -1,5 +1,8 @@
 <!-- Static "my apps" modal, injected at the theme's body-extensions hook.
-     Triggered by the "Apps" link added to the top nav (layouts/partials/header.html). -->
+     Triggered by the "Apps" link added to the top nav (layouts/partials/header.html).
+     Colors mirror the theme's own light/dark palette (assets/scss/_variables.scss)
+     instead of undefined CSS custom properties, following the same
+     body.colorscheme-{dark,auto} pattern the theme itself uses. -->
 <style>
   #my-apps-overlay {
     display: none;
@@ -17,15 +20,11 @@
   #my-apps-modal {
     width: 100%;
     max-width: 360px;
-    background: var(--body-bg, #fff);
-    color: var(--body-color, #1a1a1a);
+    background: #fafafa;
+    color: #212121;
     border-radius: 12px;
     padding: 1.5rem;
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
-  }
-  #my-apps-modal h3 {
-    margin: 0 0 1rem;
-    font-size: 1.1rem;
   }
   #my-apps-modal .my-apps-list {
     display: flex;
@@ -33,40 +32,68 @@
     gap: 0.6rem;
   }
   #my-apps-modal a.my-app-link {
-    display: block;
-    padding: 0.75rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 0.9rem 1rem;
     border-radius: 8px;
-    border: 1px solid rgba(127, 127, 127, 0.3);
+    border: 1px solid #ccc;
     text-decoration: none;
     color: inherit;
     font-weight: 600;
     transition: border-color 0.15s ease;
   }
   #my-apps-modal a.my-app-link:hover {
-    border-color: #2f333f;
+    border-color: #1565c0;
   }
   #my-apps-modal a.my-app-link small {
     display: block;
     font-weight: 400;
     opacity: 0.7;
-    margin-top: 0.15rem;
+    margin-top: 0.25rem;
   }
   #my-apps-close {
     margin-top: 1.25rem;
     width: 100%;
     padding: 0.6rem;
     border-radius: 8px;
-    border: 1px solid rgba(127, 127, 127, 0.3);
+    border: 1px solid #ccc;
     background: transparent;
     color: inherit;
     font-family: inherit;
     cursor: pointer;
   }
+
+  body.colorscheme-dark #my-apps-modal {
+    background: #212121;
+    color: #dadada;
+  }
+  body.colorscheme-dark #my-apps-modal a.my-app-link,
+  body.colorscheme-dark #my-apps-close {
+    border-color: #4f4f4f;
+  }
+  body.colorscheme-dark #my-apps-modal a.my-app-link:hover {
+    border-color: #42a5f5;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    body.colorscheme-auto #my-apps-modal {
+      background: #212121;
+      color: #dadada;
+    }
+    body.colorscheme-auto #my-apps-modal a.my-app-link,
+    body.colorscheme-auto #my-apps-close {
+      border-color: #4f4f4f;
+    }
+    body.colorscheme-auto #my-apps-modal a.my-app-link:hover {
+      border-color: #42a5f5;
+    }
+  }
 </style>
 
-<div id="my-apps-overlay" role="dialog" aria-modal="true" aria-labelledby="my-apps-title">
+<div id="my-apps-overlay" role="dialog" aria-modal="true" aria-label="Meus apps">
   <div id="my-apps-modal">
-    <h3 id="my-apps-title">Meus apps</h3>
     <div class="my-apps-list">
       <a class="my-app-link" href="https://e-ile.armandosolheiro.xyz" target="_blank" rel="noopener">
         E-ilê
