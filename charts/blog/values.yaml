@@ -1,0 +1,32 @@
+# =============================================================================
+# blog Helm chart — default values
+# Override at deploy time via --set or a values-prod.yaml file.
+# =============================================================================
+
+image:
+  registry: container-registry.br-se1.magalu.cloud/asolheiro-registry
+  repository: blog
+  tag: "latest"
+  pullPolicy: IfNotPresent
+
+replicas: 2
+
+resources:
+  requests:
+    cpu: "25m"
+    memory: "32Mi"
+  limits:
+    cpu: "100m"
+    memory: "64Mi"
+
+ingress:
+  host: armandosolheiro.xyz
+  clusterIssuer: letsencrypt
+
+# -- Private registry pull credentials ------------------------------------------
+# Supply at deploy time via --values (see .github/workflows/deploy.yml).
+imageCredentials:
+  enabled: false
+  registry: container-registry.br-se1.magalu.cloud/asolheiro-registry
+  username: ""
+  password: ""

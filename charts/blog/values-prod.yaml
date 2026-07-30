@@ -1,0 +1,7 @@
+# Production overrides for the blog Helm chart.
+
+image:
+  pullPolicy: Always
+
+imageCredentials:
+  enabled: true
