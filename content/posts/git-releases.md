@@ -14,7 +14,6 @@ tags = [
 categories = [
     "pipeline",
 ]
-series = ["Theme Demo"]
 +++
 
 ## 1\. Introdução
@@ -23,7 +22,7 @@ Recentemente tive a oportunidade de escrever uma CLI em Go para automatizar a pr
 
 A CLI atende muito bem seu objetivo, mas, por se tratar de uma empresa com foco em Infraestrutura achamos mais adequado fornecer o binário já construído, ao invés de delegar que o usuário clone o repositório e construa o artefato final.
 
-Para centralizar a distribuição dessa maneira, ambas plataformas de hospedagem de código, GitHUb e GitLab, permitem disponibilizar *releases*/lançamentos para o usuário no mesmo repositório onde o código fonte é mantido.
+Para centralizar a distribuição dessa maneira, ambas plataformas de hospedagem de código, GitHub e GitLab, permitem disponibilizar *releases*/lançamentos para o usuário no mesmo repositório onde o código fonte é mantido.
 
 Basicamente, o que precisamos é de uma esteira que possua dois passos:
 
@@ -54,12 +53,12 @@ Nesse caso, definimos três informações:
 
 * `name`: escolhendo o nome que a esteira receberá no GitHub;
     
-* `on.push.tags: ['v*']`: definindo que a esteira será acionada toda vez que houver um push em qualquer;
+* `on.push.tags: ['v*']`: definindo que a esteira será acionada toda vez que houver um push em qualquer tag;
     
 * `permissions.contents: write`: para permitir que lá na frente o *Actions* possa escrever no repositório e adicionar as releases.
     
 
-> Nota: Além dessa configuração, é necessário que o repositório esteja com *Read and Write* configurado em "Settings &gt;&gt; Actions &gt;&gt; General &gt;&gt; Workflow permission"
+> Nota: Além dessa configuração, é necessário que o repositório esteja com *Read and Write* configurado em "Settings >> Actions >> General >> Workflow permission"
 
 Além disso, configuramos o ambiente utilizando para os processos:
 
@@ -102,7 +101,7 @@ Para criar os binários, utilizamos as variáveis `GOOS` e `GOARCH` para definir
 | linux | arm64 | ghc-v1.0.0-linux-arm64 |
 | windows | amd64 | ghc-v1.0.0-windows-amd64 |
 
-Elas são utilizadas em comandos do contrução padrão da linguagem, com suas saídas direcionadas para o diretório `./dist`.
+Elas são utilizadas em comandos de construção padrão da linguagem, com suas saídas direcionadas para o diretório `./dist`.
 
 ```yaml
 - name: Build binaries
@@ -158,7 +157,7 @@ E verificamos o resultado:
 
 ### 3.1. Configurações iniciais
 
-No GiLab também começamos definindo informações:
+No GitLab também começamos definindo informações:
 
 ```yaml
 variables:
@@ -177,7 +176,7 @@ Já nessa plataforma, dividimos a execução em três estágios, construção, u
 
 ### 3.1. Construção dos binários
 
-A etapa de construção é essencialmente a mesma feita para o GitHub: o comando padrão executado diversas vezes para gerar um artefato para cara combinação de sistema operacional e arquitetura.
+A etapa de construção é essencialmente a mesma feita para o GitHub: o comando padrão executado diversas vezes para gerar um artefato para cada combinação de sistema operacional e arquitetura.
 
 ```yaml
 build:
@@ -211,7 +210,7 @@ Outro ponto interessante é `build.artifacts.expire_in: 1 week`. Nesse campo, te
 
 ### 3.2. Upload
 
-Diferente do GitHUb, no qual adicionamos os artefatos direto no lançamento de versões, aqui utilizamos esse estágio intermediário para salvar as saídas.
+Diferente do GitHub, no qual adicionamos os artefatos direto no lançamento de versões, aqui utilizamos esse estágio intermediário para salvar as saídas.
 
 ```yaml
 upload:
@@ -232,7 +231,7 @@ upload:
       done
 ```
 
-Os binário produzidos no estágio de construção são salvos em um "*registry*", definido lá em cima, nas configurações iniciais.
+Os binários produzidos no estágio de construção são salvos em um "*registry*", definido lá em cima, nas configurações iniciais.
 
 ### 3.3. Distribuição dos artefatos
 

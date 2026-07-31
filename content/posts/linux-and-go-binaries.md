@@ -15,10 +15,9 @@ categories = [
     "linux",
     "go",
 ]
-series = ["Theme Demo"]
 +++
 
-Na minha humilde opinião, um dos motivos que fazem programar em Go ser tão bom é a possibilidade de gerar um binário para execução com a facilidade de um `go build .`no terminal.
+Na minha humilde opinião, um dos motivos que fazem programar em Go ser tão bom é a possibilidade de gerar um binário para execução com a facilidade de um `go build .` no terminal.
 
 Essa pequena prática traz diversas vantagens para nós desenvolvedores:
 
@@ -67,9 +66,9 @@ os quais ainda podemos reduzir mais se utilizarmos *linker flags —* que se c
 
 Nesse caso, podemos fazer a build com duas flags em específico:
 
-`-s` : omitirá a tabela de símbolos e informações para debug
+`-s` : omitirá a tabela de símbolos e informações para debug
 
-`-w` : omite a tabela DWARF para debug
+`-w` : omite a tabela DWARF para debug
 
 As quais passaremos no momento da compilação:
 
@@ -81,7 +80,7 @@ e nos permite reduzir nosso binário em 2.8MB, ou cerca de 16%, neste caso. Há 
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1731102421936/c9f6baa8-b0b2-466c-83f8-f3e29fce2f3b.png)
 
-Tamanho do código-fonte e do binário resultante usando as linker flags
+Tamanho do código-fonte e do binário resultante usando as linker flags
 
 Vale salientar, também, que Go naturalmente cria binários compatíveis com a máquina em que estamos compilamos o código, mas isso não nos impede de fazer alterações visando resultados feitos para rodar em outros tipos sistemas operacionais e arquiteturas.
 
@@ -89,7 +88,7 @@ Essas informações especificamente são guardadas pelo compilador Go na forma d
 
 Dessa forma, podemos intuir que é possível passar diferentes valores para essas variáveis durante o processo de compilação. Go inclusive nos adianta quais os possíveis valores para elas na [documentação](https://go.dev/src/go/build/syslist.go)
 
-Por exemplo, fazendo `GOOS=windows GOARCH=amd64 go build .` instruímos o compilador a fazer um binário que rode especificamente em sistemas operacionais Windows com arquitetura de processamento AMD64.
+Por exemplo, fazendo `GOOS=windows GOARCH=amd64 go build .` instruímos o compilador a fazer um binário que rode especificamente em sistemas operacionais Windows com arquitetura de processamento AMD64.
 
 Isso acaba se tornando uma mão na roda não só para quem está desenvolvendo, mas também para quem fará a implementação.
 
@@ -113,11 +112,11 @@ RUN ["go", "build", "."]
 CMD ["./main"]
 ```
 
-para criar a imagem com `docker buildx build -t go-golang .`:
+para criar a imagem com `docker buildx build -t go-golang .`:
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1731102423630/40817a78-f3b4-48c0-adf0-2d026adf24c5.png)
 
-No terminal, docker image ls
+No terminal, docker image ls
 
 Só que, se compreendermos que para rodar o binário não precisamos do compilador em si, mas só do kernel linux, podemos utilizar de técnicas de construção de imagens em Docker para otimizar ainda mais os recursos gastos por nossa imagem.
 
@@ -125,7 +124,7 @@ Nesse caso, em específico, podemos reduzir em centenas de vezes o espaço ocupa
 
 Em resumo, essa técnica nos permitirá construir nossa imagem de container em duas etapas:
 
-1. Estágio de build, onde copiaremos os arquivos da máquina local para o container montado com uma imagem base`golang:latest` que servirá apenas para que compilemos o código-fonte;
+1. Estágio de build, onde copiaremos os arquivos da máquina local para o container montado com uma imagem base `golang:latest` que servirá apenas para que compilemos o código-fonte;
     
 2. Estágio de execução, quando trazemos o binário já compilado para uma imagem base linux (sem o Go instalado) e o executamos.
     
@@ -156,23 +155,23 @@ COPY --from=build /go/src/app /app
 CMD ["./main"]
 ```
 
-Construindo essa imagem com `docker buildx build -t go-ubuntu .` já temos uma boa diferença no recurso utilizado. Uma imagem mais de 10 vezes menor :
+Construindo essa imagem com `docker buildx build -t go-ubuntu .` já temos uma boa diferença no recurso utilizado. Uma imagem mais de 10 vezes menor:
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1731102425644/ec3619e0-c6ec-4b3d-8dcc-0fdc101fb0bc.png)
 
-No terminal, docker image ls
+No terminal, docker image ls
 
 E seguindo nessa linha podemos comprimir ainda mais nossa imagem. Usando `alpine:latest`, uma imagem base muito conhecida por quem costuma reduzir o tamanho dos containers:
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1731102427668/3036612c-c8d1-44c7-99a0-10b9860c9c24.png)
 
-No terminal, docker image ls
+No terminal, docker image ls
 
-Ou, se quisermos esticar ainda mais a corda, podemos usar `scratch`, que basicamente é uma “imagem” linux mínima, vazia, que contém nenhum binário, biblioteca ou qualquer outra coisa, essa “distro” é muito comum quando queremos rodar um único binário:
+Ou, se quisermos esticar ainda mais a corda, podemos usar `scratch`, que basicamente é uma “imagem” linux mínima, vazia, que não contém binário, biblioteca ou qualquer outra coisa, essa “distro” é muito comum quando queremos rodar um único binário:
 
 ![](https://cdn.hashnode.com/res/hashnode/image/upload/v1731102428802/e40f53bc-d989-46ca-9648-0e1e9eb8365a.png)
 
-No terminal, docker image ls
+No terminal, docker image ls
 
 Dessa maneira, conseguimos reduzir ainda mais o espaço ocupado pela nossa imagem. Nesse caso, uma imagem quase 94 vezes menor! Uma redução absurda.
 

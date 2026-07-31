@@ -1,10 +1,10 @@
 +++
-title = "Sobre"
+title = "About"
 description = "Description about Armando Solheiro"
 slug = "about"
-date = "2019-02-28"
+date = "2025-03-29"
 aliases = ["about-me", "about-armando", "contact"]
-author = "Armando A. v. S.Solheiro"
+author = "Armando A. v. G. Solheiro"
 +++
 
 ## Overview

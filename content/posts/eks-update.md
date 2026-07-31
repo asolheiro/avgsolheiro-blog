@@ -1,3 +1,18 @@
++++
+authors = ["Armando Solheiro"]
+title = "Atualizando clusters EKS"
+date = "2025-06-04"
+description = "Passo a passo para atualizar o control plane e os nodegroups de um cluster EKS"
+tags = [
+    "kubernetes",
+    "eks",
+    "aws",
+]
+categories = [
+    "kubernetes",
+]
++++
+
 # Atualizando clusters EKS
 
 ## Pré-atualização
@@ -21,7 +36,7 @@
 
 - Verifique a versão do EKS (Control Planes) no cluster usando o console da AWS:
 
-> ![AWS EKS console](/static/images/03-01.webp)
+> ![AWS EKS console](/images/03-01.webp)
 >
 > ***Figura 01: AWS Console - Destaque para a versão do Kubernetes no Control Plane***
 
@@ -29,7 +44,7 @@
 
 > Obs.: É possível que a versão do kubernetes sendo executada nos nodes control plane/API server seja diferente da versão sendo executada nos workers/nodegroups. Esse conceito é chamado de "version skew"
 
-> ![AWS EKS console](/static/images/03-02.webp)
+> ![AWS EKS console](/images/03-02.webp)
 >
 > ***Figura 02: AWS Console - Destaque para a versão dos nodegroups***
 
@@ -58,12 +73,12 @@ eksctl upgrade nodegroup <NODEGROUP_NAME> \
 
 > Obs.: Caso a versão do node group esteja mais de uma versão atrás da versão do kubernetes (Ex.: Kubernetes na 1.27 e NodeGroup na 1.25), é necessário atualizar os node groups primeiro e em seguida a API.
 >
-> Fluxo correto: 1.25 -> 1.26 -> 1.27b
+> Fluxo correto: 1.25 -> 1.26 -> 1.27
 > Fluxo incorreto: 1.25 -> 1.27
 >
 > O mesmo vale para atualizações da versão do kubernetes API
 
-- Acompanhe a atualização por meio dos logs no temrinal e na GUI, se disponível. Durante o processo será possível ver os nodes com a versão antiga caindo e nodes com a versão nova subindo. Após isso, verifique se as aplicaçõesque estavam executando antes do processo subiram corretamente e estão em pleno funcionamento.
+- Acompanhe a atualização por meio dos logs no terminal e na GUI, se disponível. Durante o processo será possível ver os nodes com a versão antiga caindo e nodes com a versão nova subindo. Após isso, verifique se as aplicações que estavam executando antes do processo subiram corretamente e estão em pleno funcionamento.
 
 ## Referências
 

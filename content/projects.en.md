@@ -1,9 +1,10 @@
 +++
-title = "About"
-description = "Descrição sobre Armando Solheiro "
-date = "2019-02-28"
-aliases = ["about-us", "about-hugo", "contact"]
-author = "Hugo Authors"
+title = "Projects"
+description = "Personal projects"
+slug = "projects"
+date = "2025-03-29"
+aliases = ["personal-projects", "projects"]
+author = "Armando A. v. G. Solheiro"
 +++
 
 # Personal Projects

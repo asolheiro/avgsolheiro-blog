@@ -1,16 +1,16 @@
 +++
 title = "Sobre"
-description = "Descrição sobre Armando Solheiro "
+description = "Descrição sobre Armando Solheiro"
 slug = "sobre"
 date = "2025-03-29"
 aliases = ["about-me", "about-armando", "contact"]
-author = "Armando A. v. S.Solheiro"
+author = "Armando A. v. G. Solheiro"
 +++
 
 
 ## Visão geral
 
-Sou um profissional com foco em Desenvolvimento de BackEnd de Softwares e Sustentação de Operações. Apaixonado pelo código livre, pelo novo e pelo meu jeito de fazer as coisas
+Sou um profissional com foco em Desenvolvimento de BackEnd de Softwares e Sustentação de Operações. Apaixonado pelo código livre, pelo novo e pelo meu jeito de fazer as coisas.
 
 Com uma sólida experiência em Go e Python para o desenvolvimento e Docker, Kubernetes e Helm para empregar DevOps, estou sempre em busca de desafios e novas tecnologias que me permitam crescer, me tornar um profissional mais completo e contribuir para o sucesso das equipes e empresas com as quais colaboro.
 
@@ -18,7 +18,7 @@ Com uma sólida experiência em Go e Python para o desenvolvimento e Docker, Kub
 
 - **Go**: Experiência abrangente com desenvolvimento back-end, automação, CLIs, gRPC e construção de APIs.
 - **Python**: Experiência com desenvolvimento back-end, automações, construção de APIs escaláveis empregando FastAPI e Django.
-- **Java**: Experiência com desenvolvimento back-end, construção de APIs utilizando Spring Boot/Framework
+- **Java**: Experiência com desenvolvimento back-end, construção de APIs utilizando Spring Boot/Framework.
 
 ## 🛞 Cultura DevOps
 

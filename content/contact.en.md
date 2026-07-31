@@ -4,7 +4,7 @@ description = "Author's contacts and social networks"
 slug = "contact"
 date = "2025-03-29"
 aliases = ["contact"]
-author = "Armando A. v. S.Solheiro"
+author = "Armando A. v. G. Solheiro"
 +++
 
 ### 🌎 Links & Time Zone
