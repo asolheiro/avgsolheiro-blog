@@ -3,6 +3,13 @@
 # Override at deploy time via --set or a values-prod.yaml file.
 # =============================================================================
 
+# -- Network policy --------------------------------------------------------------
+# Ingress-only isolation (egress untouched — see networkpolicy.yaml comment).
+networkPolicy:
+  enabled: true
+  # k3s's built-in Traefik runs in kube-system by default.
+  ingressControllerNamespace: kube-system
+
 image:
   registry: container-registry.br-se1.magalu.cloud/asolheiro-registry
   repository: blog
