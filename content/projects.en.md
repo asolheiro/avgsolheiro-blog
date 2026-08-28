@@ -9,6 +9,13 @@ author = "Armando A. v. G. Solheiro"
 
 # Personal Projects
 
+## 🖥️ Apps
+
+- [AFFiNE](https://affine.armandosolheiro.xyz): Self-hosted Notion-like workspace — block-based docs, whiteboard, and databases, backed by Magalu Cloud object storage.
+- [Securo](https://securo.armandosolheiro.xyz): Open-source, privacy-first, self-hosted personal finance manager.
+- [e-ile](https://e-ile.armandosolheiro.xyz): Offline-first multi-platform app for managing a candomblé terreiro's community life.
+- [tec-sheets](https://tec-sheets.armandosolheiro.xyz): Personal fork of Iris PDV (a point-of-sale platform), running for testing and validation.
+
 ## 📚 Documentation
 
 - [GitaDocs](https://github.com/GitaCloudTeam/gita-doc): Documentation of Gita created with Docusaurus
