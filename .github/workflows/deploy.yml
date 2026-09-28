@@ -91,4 +91,4 @@ jobs:
           echo ""
           kubectl get pods -n blog
           echo ""
-          echo "https://armandosolheiro.xyz"
+          echo "https://armandosolheiro.com.br"

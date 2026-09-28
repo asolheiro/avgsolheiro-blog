@@ -27,7 +27,7 @@ resources:
     memory: "64Mi"
 
 ingress:
-  host: armandosolheiro.xyz
+  host: armandosolheiro.com.br
   clusterIssuer: letsencrypt
 
 # -- Private registry pull credentials ------------------------------------------
