@@ -11,10 +11,10 @@ author = "Armando A. v. G. Solheiro"
 
 ## 🖥️ Apps
 
-- [AFFiNE](https://affine.armandosolheiro.xyz): Workspace self-hosted estilo Notion — documentos em blocos, whiteboard e banco de dados, com armazenamento de objetos na Magalu Cloud.
-- [Securo](https://securo.armandosolheiro.xyz): Gerenciador financeiro pessoal, open-source e self-hosted, com foco em privacidade.
-- [e-ile](https://e-ile.armandosolheiro.xyz): App multiplataforma offline-first para gestão da vida comunitária de um terreiro de candomblé.
-- [tec-sheets](https://tec-sheets.armandosolheiro.xyz): Fork pessoal da Iris PDV (plataforma de ponto de venda), rodando para testes e validação.
+- [AFFiNE](https://affine.armandosolheiro.com.br): Workspace self-hosted estilo Notion — documentos em blocos, whiteboard e banco de dados, com armazenamento de objetos na Magalu Cloud.
+- [Securo](https://securo.armandosolheiro.com.br): Gerenciador financeiro pessoal, open-source e self-hosted, com foco em privacidade.
+- [e-ile](https://e-ile.armandosolheiro.com.br): App multiplataforma offline-first para gestão da vida comunitária de um terreiro de candomblé.
+- [tec-sheets](https://tec-sheets.armandosolheiro.com.br): Fork pessoal da Iris PDV (plataforma de ponto de venda), rodando para testes e validação.
 
 ## 📚 Documentação
 
